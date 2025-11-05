@@ -286,7 +286,7 @@ export default function Home() {
       <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-indigo-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 px-4">
-            전화나 문자로 무료 견적받고<br className="block sm:hidden" />
+            전화나 문자로 무료 견적 받고<br className="block sm:hidden" />
             시작하세요
           </h2>
           <p className="text-lg sm:text-xl text-indigo-100 mb-8 px-4">
