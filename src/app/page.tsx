@@ -73,13 +73,13 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 혼자서는 힘든 <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">유품정리,</span>
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">걱정만 쌓여가고 계신가요?</span>
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed text-left">
+              <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
                 남겨진 물건 하나하나 정성껏,<br />
                 전문가가 책임지고 정리해드립니다.
               </p>
