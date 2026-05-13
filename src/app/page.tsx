@@ -293,7 +293,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <button 
-              onClick={() => window.open('tel:010-8967-3800')}
+              onClick={() => window.open('tel:010-9595-6424')}
               className="bg-white text-indigo-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg cursor-pointer w-full sm:w-auto"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,7 +302,7 @@ export default function Home() {
               전화 상담하기
             </button>
             <button 
-              onClick={() => window.open('sms:010-8967-3800')}
+              onClick={() => window.open('sms:010-9595-6424')}
               className="bg-white text-indigo-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg cursor-pointer w-full sm:w-auto"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -338,7 +338,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-4">연락처</h4>
               <ul className="space-y-2 text-gray-400 text-sm sm:text-base">
-                <li><a href="tel:010-8967-3800" className="hover:text-white transition-colors">010-8967-3800</a></li>
+                <li><a href="tel:010-9595-6424" className="hover:text-white transition-colors">010-9595-6424</a></li>
                 <li><a href="mailto:jks7094@gmail.com" className="hover:text-white transition-colors">jks7094@gmail.com</a></li>
               </ul>
             </div>
