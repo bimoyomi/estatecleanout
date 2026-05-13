@@ -174,11 +174,13 @@ export default function Home() {
               <div className="text-center">
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-700 mb-4">Before</h3>
                 <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <div className="bg-gray-200 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src="/image/before.jpg" 
-                      alt="Before - 짐이 가득한 방" 
-                      className="w-full h-full object-cover rounded-lg"
+                  <div className="relative bg-gray-200 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 overflow-hidden">
+                    <Image
+                      src="/image/before.jpg"
+                      alt="Before - 짐이 가득한 방"
+                      fill
+                      className="object-cover rounded-lg"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
                   <div className="space-y-2 text-left">
@@ -204,11 +206,13 @@ export default function Home() {
               <div className="text-center">
                 <h3 className="text-xl sm:text-2xl font-bold text-indigo-600 mb-4">After</h3>
                 <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <div className="bg-gray-100 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src="/image/after.jpg" 
-                      alt="After - 완전히 비워진 방" 
-                      className="w-full h-full object-cover rounded-lg"
+                  <div className="relative bg-gray-100 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 overflow-hidden">
+                    <Image
+                      src="/image/after.jpg"
+                      alt="After - 완전히 비워진 방"
+                      fill
+                      className="object-cover rounded-lg"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
                   <div className="space-y-2 text-left">
@@ -257,10 +261,13 @@ export default function Home() {
               {Array.from({ length: 15 }, (_, i) => (
                 <div key={`first-${i}`} className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4">
                   <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                    <img
+                    <Image
                       src={`/image/${i + 1}.PNG`}
                       alt={`실제 후기 ${i + 1}`}
-                      className="rounded-xl object-contain max-h-full w-full"
+                      width={900}
+                      height={1200}
+                      className="rounded-xl object-contain max-h-full w-full h-auto"
+                      sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
                     />
                   </div>
                 </div>
@@ -269,10 +276,13 @@ export default function Home() {
               {Array.from({ length: 15 }, (_, i) => (
                 <div key={`second-${i}`} className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4">
                   <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                    <img
+                    <Image
                       src={`/image/${i + 1}.PNG`}
                       alt={`실제 후기 ${i + 1}`}
-                      className="rounded-xl object-contain max-h-full w-full"
+                      width={900}
+                      height={1200}
+                      className="rounded-xl object-contain max-h-full w-full h-auto"
+                      sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
                     />
                   </div>
                 </div>
