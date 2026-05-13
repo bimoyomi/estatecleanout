@@ -155,7 +155,7 @@ function ServiceStepsInfiniteMobile() {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory touch-pan-x pb-1 scroll-pl-4 scroll-pr-4 sm:scroll-pl-6 sm:scroll-pr-6 lg:scroll-pl-8 lg:scroll-pr-8 [-webkit-overflow-scrolling:touch]"
+        className="flex gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory touch-pan-x pb-1 scroll-pl-4 scroll-pr-4 sm:scroll-pl-6 sm:scroll-pr-6 lg:scroll-pl-8 lg:scroll-pr-8 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         <div ref={setRef} className="flex gap-6 sm:gap-8 flex-none">
           {SERVICE_STEPS.map((s) => (
@@ -343,7 +343,7 @@ export default function Home() {
                   <div className="space-y-2 text-left">
                     <div className="flex items-start">
                       <div className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-600 text-sm sm:text-base">방을 꽉 채운 대형 침대와 장롱</span>
+                      <span className="text-gray-600 text-sm sm:text-base">방을 꽉 채운 대형 가구와 가전</span>
                     </div>
                     <div className="flex items-start">
                       <div className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2 flex-shrink-0"></div>
