@@ -3,6 +3,23 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+/** 슬라이드 카드 높이를 이미지 로드 전부터 고정해 CLS(큰 여백 후 수축) 방지 */
+function MarqueeSlideImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 w-full overflow-hidden">
+      <div className="relative w-full aspect-[3/4]">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-contain"
+          sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [isAnimationStarted, setIsAnimationStarted] = useState(false);
 
@@ -187,16 +204,10 @@ export default function Home() {
                           key={`before-first-${i}`}
                           className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
                         >
-                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                            <Image
-                              src={`/image/before${i + 1}.jpg`}
-                              alt={`Before 사례 ${i + 1}`}
-                              width={900}
-                              height={1200}
-                              className="rounded-xl object-contain max-h-full w-full h-auto"
-                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                            />
-                          </div>
+                          <MarqueeSlideImage
+                            src={`/image/before${i + 1}.jpg`}
+                            alt={`Before 사례 ${i + 1}`}
+                          />
                         </div>
                       ))}
                       {Array.from({ length: 15 }, (_, i) => (
@@ -204,16 +215,10 @@ export default function Home() {
                           key={`before-second-${i}`}
                           className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
                         >
-                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                            <Image
-                              src={`/image/before${i + 1}.jpg`}
-                              alt={`Before 사례 ${i + 1}`}
-                              width={900}
-                              height={1200}
-                              className="rounded-xl object-contain max-h-full w-full h-auto"
-                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                            />
-                          </div>
+                          <MarqueeSlideImage
+                            src={`/image/before${i + 1}.jpg`}
+                            alt={`Before 사례 ${i + 1}`}
+                          />
                         </div>
                       ))}
                     </div>
@@ -254,16 +259,10 @@ export default function Home() {
                           key={`after-first-${i}`}
                           className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
                         >
-                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                            <Image
-                              src={`/image/after${i + 1}.jpg`}
-                              alt={`After 사례 ${i + 1}`}
-                              width={900}
-                              height={1200}
-                              className="rounded-xl object-contain max-h-full w-full h-auto"
-                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                            />
-                          </div>
+                          <MarqueeSlideImage
+                            src={`/image/after${i + 1}.jpg`}
+                            alt={`After 사례 ${i + 1}`}
+                          />
                         </div>
                       ))}
                       {Array.from({ length: 15 }, (_, i) => (
@@ -271,16 +270,10 @@ export default function Home() {
                           key={`after-second-${i}`}
                           className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
                         >
-                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                            <Image
-                              src={`/image/after${i + 1}.jpg`}
-                              alt={`After 사례 ${i + 1}`}
-                              width={900}
-                              height={1200}
-                              className="rounded-xl object-contain max-h-full w-full h-auto"
-                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                            />
-                          </div>
+                          <MarqueeSlideImage
+                            src={`/image/after${i + 1}.jpg`}
+                            alt={`After 사례 ${i + 1}`}
+                          />
                         </div>
                       ))}
                     </div>
@@ -330,31 +323,13 @@ export default function Home() {
               {/* 첫 번째 세트 */}
               {Array.from({ length: 15 }, (_, i) => (
                 <div key={`first-${i}`} className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4">
-                  <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                    <Image
-                      src={`/image/${i + 1}.PNG`}
-                      alt={`실제 후기 ${i + 1}`}
-                      width={900}
-                      height={1200}
-                      className="rounded-xl object-contain max-h-full w-full h-auto"
-                      sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                    />
-                  </div>
+                  <MarqueeSlideImage src={`/image/${i + 1}.PNG`} alt={`실제 후기 ${i + 1}`} />
                 </div>
               ))}
               {/* 두 번째 세트 */}
               {Array.from({ length: 15 }, (_, i) => (
                 <div key={`second-${i}`} className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4">
-                  <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
-                    <Image
-                      src={`/image/${i + 1}.PNG`}
-                      alt={`실제 후기 ${i + 1}`}
-                      width={900}
-                      height={1200}
-                      className="rounded-xl object-contain max-h-full w-full h-auto"
-                      sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
-                    />
-                  </div>
+                  <MarqueeSlideImage src={`/image/${i + 1}.PNG`} alt={`실제 후기 ${i + 1}`} />
                 </div>
               ))}
             </div>
