@@ -67,7 +67,7 @@ function ServiceStepCard({
 }) {
   const outer =
     layout === "scroll"
-      ? "text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0"
+      ? "text-center flex-none snap-center w-[min(92vw,20rem)] shrink-0"
       : "text-center w-full min-w-0";
   return (
     <div className={outer}>
@@ -109,12 +109,27 @@ function ServiceStepsInfiniteMobile() {
   }, []);
 
   useLayoutEffect(() => {
-    const sc = scrollRef.current;
-    if (!sc || stridePx <= 0 || positionedRef.current) return;
-    positionedRef.current = true;
-    skipLoopRef.current = true;
-    sc.scrollTo({ left: stridePx, behavior: "auto" });
-    skipLoopRef.current = false;
+    const place = (): boolean => {
+      if (positionedRef.current) return true;
+      const sc = scrollRef.current;
+      const second = set2Ref.current;
+      if (!sc || !second || stridePx <= 0) return false;
+      const cardEl = second.firstElementChild as HTMLElement | undefined;
+      if (!cardEl || cardEl.offsetWidth <= 0) return false;
+      const cardCenter = second.offsetLeft + cardEl.offsetWidth / 2;
+      const maxScroll = Math.max(0, sc.scrollWidth - sc.clientWidth);
+      const target = Math.min(Math.max(0, cardCenter - sc.clientWidth / 2), maxScroll);
+      positionedRef.current = true;
+      skipLoopRef.current = true;
+      sc.scrollTo({ left: target, behavior: "auto" });
+      skipLoopRef.current = false;
+      return true;
+    };
+    if (place()) return;
+    const id = requestAnimationFrame(() => {
+      place();
+    });
+    return () => cancelAnimationFrame(id);
   }, [stridePx]);
 
   const handleScroll = () => {
@@ -140,7 +155,7 @@ function ServiceStepsInfiniteMobile() {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory touch-pan-x pb-1 [-webkit-overflow-scrolling:touch]"
+        className="flex gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory touch-pan-x pb-1 scroll-pl-4 scroll-pr-4 sm:scroll-pl-6 sm:scroll-pr-6 lg:scroll-pl-8 lg:scroll-pr-8 [-webkit-overflow-scrolling:touch]"
       >
         <div ref={setRef} className="flex gap-6 sm:gap-8 flex-none">
           {SERVICE_STEPS.map((s) => (
