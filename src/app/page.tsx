@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 /** 슬라이드 높이를 로드 전부터 고정(CLS 방지). 카드 너비의 16:9로 잡아 가로형 사진 위·아래 여백을 줄임 */
 function MarqueeSlideImage({ src, alt }: { src: string; alt: string }) {
@@ -15,6 +16,142 @@ function MarqueeSlideImage({ src, alt }: { src: string; alt: string }) {
           className="object-contain"
           sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
         />
+      </div>
+    </div>
+  );
+}
+
+const SERVICE_STEPS = [
+  {
+    n: 1,
+    title: "상담 및 견적",
+    body: (
+      <>
+        전화나 카카오톡으로 간단한 상담 후<br />
+        정확한 견적을 받아보세요.
+      </>
+    ),
+  },
+  {
+    n: 2,
+    title: "전문팀 방문",
+    body: (
+      <>
+        약속된 시간에 전문 정리팀이 방문하여<br />
+        체계적으로 정리를 시작합니다.
+      </>
+    ),
+  },
+  {
+    n: 3,
+    title: "완료 및 확인",
+    body: (
+      <>
+        하루 만에 모든 정리가 완료되고,<br />
+        깔끔한 공간을 확인하세요.
+      </>
+    ),
+  },
+] as const;
+
+function ServiceStepCard({
+  n,
+  title,
+  body,
+  layout = "scroll",
+}: {
+  n: number;
+  title: string;
+  body: ReactNode;
+  layout?: "scroll" | "grid";
+}) {
+  const outer =
+    layout === "scroll"
+      ? "text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0"
+      : "text-center w-full min-w-0";
+  return (
+    <div className={outer}>
+      <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span className="text-xl sm:text-2xl font-bold text-indigo-600">{n}</span>
+        </div>
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">{title}</h3>
+        <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{body}</p>
+      </div>
+    </div>
+  );
+}
+
+/** 모바일: 동일 3단계를 두 번 이어 붙이고 스크롤 끝에서 점프해 무한 스크롤처럼 보이게 함 */
+function ServiceStepsInfiniteMobile() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const setRef = useRef<HTMLDivElement>(null);
+  const set2Ref = useRef<HTMLDivElement>(null);
+  const [stridePx, setStridePx] = useState(0);
+  const skipLoopRef = useRef(false);
+  const positionedRef = useRef(false);
+
+  useEffect(() => {
+    const sc = scrollRef.current;
+    const first = setRef.current;
+    const second = set2Ref.current;
+    if (!sc || !first || !second) return;
+    const measure = () => {
+      const stride = second.offsetLeft;
+      setStridePx((prev) => (prev !== stride ? stride : prev));
+    };
+    const ro = new ResizeObserver(measure);
+    ro.observe(sc);
+    ro.observe(first);
+    ro.observe(second);
+    measure();
+    return () => ro.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const sc = scrollRef.current;
+    if (!sc || stridePx <= 0 || positionedRef.current) return;
+    positionedRef.current = true;
+    skipLoopRef.current = true;
+    sc.scrollTo({ left: stridePx, behavior: "auto" });
+    skipLoopRef.current = false;
+  }, [stridePx]);
+
+  const handleScroll = () => {
+    if (skipLoopRef.current) return;
+    const sc = scrollRef.current;
+    if (!sc || stridePx <= 0) return;
+    const left = sc.scrollLeft;
+    const max = sc.scrollWidth - sc.clientWidth;
+    const edge = 8;
+    if (left <= edge) {
+      skipLoopRef.current = true;
+      sc.scrollTo({ left: left + stridePx, behavior: "auto" });
+      skipLoopRef.current = false;
+    } else if (left >= max - edge) {
+      skipLoopRef.current = true;
+      sc.scrollTo({ left: left - stridePx, behavior: "auto" });
+      skipLoopRef.current = false;
+    }
+  };
+
+  return (
+    <div className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory touch-pan-x pb-1 [-webkit-overflow-scrolling:touch]"
+      >
+        <div ref={setRef} className="flex gap-6 sm:gap-8 flex-none">
+          {SERVICE_STEPS.map((s) => (
+            <ServiceStepCard key={`a-${s.n}`} n={s.n} title={s.title} body={s.body} />
+          ))}
+        </div>
+        <div ref={set2Ref} className="flex gap-6 sm:gap-8 flex-none" aria-hidden>
+          {SERVICE_STEPS.map((s) => (
+            <ServiceStepCard key={`b-${s.n}`} n={s.n} title={s.title} body={s.body} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -127,50 +264,13 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 md:mx-0 md:px-0">
-            <div className="flex md:grid md:grid-cols-3 gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden md:overflow-visible overscroll-x-contain snap-x snap-mandatory md:snap-none scroll-smooth touch-pan-x pb-1 md:pb-0 [-webkit-overflow-scrolling:touch]">
-            {/* 1단계 */}
-            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl sm:text-2xl font-bold text-indigo-600">1</span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">상담 및 견적</h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                  전화나 카카오톡으로 간단한 상담 후<br />
-                  정확한 견적을 받아보세요.
-                </p>
-              </div>
-            </div>
-
-            {/* 2단계 */}
-            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl sm:text-2xl font-bold text-indigo-600">2</span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">전문팀 방문</h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                  약속된 시간에 전문 정리팀이 방문하여<br />
-                  체계적으로 정리를 시작합니다.
-                </p>
-              </div>
-            </div>
-
-            {/* 3단계 */}
-            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl sm:text-2xl font-bold text-indigo-600">3</span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">완료 및 확인</h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                  하루 만에 모든 정리가 완료되고,<br />
-                  깔끔한 공간을 확인하세요.
-                </p>
-              </div>
-            </div>
-            </div>
+          <div className="md:hidden">
+            <ServiceStepsInfiniteMobile />
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 gap-6 sm:gap-8">
+            {SERVICE_STEPS.map((s) => (
+              <ServiceStepCard key={s.n} layout="grid" n={s.n} title={s.title} body={s.body} />
+            ))}
           </div>
         </div>
       </section>
