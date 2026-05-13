@@ -127,10 +127,11 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 md:mx-0 md:px-0">
+            <div className="flex md:grid md:grid-cols-3 gap-6 sm:gap-8 overflow-x-auto overflow-y-hidden md:overflow-visible overscroll-x-contain snap-x snap-mandatory md:snap-none scroll-smooth touch-pan-x pb-1 md:pb-0 [-webkit-overflow-scrolling:touch]">
             {/* 1단계 */}
-            <div className="text-center">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-xl sm:text-2xl font-bold text-indigo-600">1</span>
                 </div>
@@ -143,8 +144,8 @@ export default function Home() {
             </div>
 
             {/* 2단계 */}
-            <div className="text-center">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-xl sm:text-2xl font-bold text-indigo-600">2</span>
                 </div>
@@ -157,8 +158,8 @@ export default function Home() {
             </div>
 
             {/* 3단계 */}
-            <div className="text-center">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <div className="text-center flex-none snap-start w-[min(92vw,20rem)] shrink-0 md:w-auto md:min-w-0">
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 h-full">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-xl sm:text-2xl font-bold text-indigo-600">3</span>
                 </div>
@@ -168,6 +169,7 @@ export default function Home() {
                   깔끔한 공간을 확인하세요.
                 </p>
               </div>
+            </div>
             </div>
           </div>
         </div>
