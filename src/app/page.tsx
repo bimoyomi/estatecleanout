@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-/** 슬라이드 카드 높이를 이미지 로드 전부터 고정해 CLS(큰 여백 후 수축) 방지 */
+/** 슬라이드 높이를 로드 전부터 고정(CLS 방지). 카드 너비의 16:9로 잡아 가로형 사진 위·아래 여백을 줄임 */
 function MarqueeSlideImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 w-full overflow-hidden">
-      <div className="relative w-full aspect-[3/4]">
+      <div className="relative w-full h-[11.25rem] sm:h-[15.75rem] lg:h-[20.25rem]">
         <Image
           src={src}
           alt={alt}
