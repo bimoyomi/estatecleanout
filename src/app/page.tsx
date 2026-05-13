@@ -174,14 +174,49 @@ export default function Home() {
               <div className="text-center">
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-700 mb-4">Before</h3>
                 <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <div className="relative bg-gray-200 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 overflow-hidden">
-                    <Image
-                      src="/image/before.jpg"
-                      alt="Before - 짐이 가득한 방"
-                      fill
-                      className="object-cover rounded-lg"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
+                  <div className="overflow-hidden relative rounded-lg mb-4 -mx-1 sm:mx-0">
+                    <div
+                      className={`flex ${isAnimationStarted ? "animate-scroll" : ""}`}
+                      style={{
+                        width: "max-content",
+                        transform: isAnimationStarted ? "none" : "translateX(0)",
+                      }}
+                    >
+                      {Array.from({ length: 15 }, (_, i) => (
+                        <div
+                          key={`before-first-${i}`}
+                          className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
+                        >
+                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
+                            <Image
+                              src={`/image/before${i + 1}.jpg`}
+                              alt={`Before 사례 ${i + 1}`}
+                              width={900}
+                              height={1200}
+                              className="rounded-xl object-contain max-h-full w-full h-auto"
+                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {Array.from({ length: 15 }, (_, i) => (
+                        <div
+                          key={`before-second-${i}`}
+                          className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
+                        >
+                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
+                            <Image
+                              src={`/image/before${i + 1}.jpg`}
+                              alt={`Before 사례 ${i + 1}`}
+                              width={900}
+                              height={1200}
+                              className="rounded-xl object-contain max-h-full w-full h-auto"
+                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="space-y-2 text-left">
                     <div className="flex items-start">
@@ -206,14 +241,49 @@ export default function Home() {
               <div className="text-center">
                 <h3 className="text-xl sm:text-2xl font-bold text-indigo-600 mb-4">After</h3>
                 <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <div className="relative bg-gray-100 h-48 sm:h-56 lg:h-64 rounded-lg mb-4 overflow-hidden">
-                    <Image
-                      src="/image/after.jpg"
-                      alt="After - 완전히 비워진 방"
-                      fill
-                      className="object-cover rounded-lg"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
+                  <div className="overflow-hidden relative rounded-lg mb-4 -mx-1 sm:mx-0">
+                    <div
+                      className={`flex ${isAnimationStarted ? "animate-scroll" : ""}`}
+                      style={{
+                        width: "max-content",
+                        transform: isAnimationStarted ? "none" : "translateX(0)",
+                      }}
+                    >
+                      {Array.from({ length: 15 }, (_, i) => (
+                        <div
+                          key={`after-first-${i}`}
+                          className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
+                        >
+                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
+                            <Image
+                              src={`/image/after${i + 1}.jpg`}
+                              alt={`After 사례 ${i + 1}`}
+                              width={900}
+                              height={1200}
+                              className="rounded-xl object-contain max-h-full w-full h-auto"
+                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {Array.from({ length: 15 }, (_, i) => (
+                        <div
+                          key={`after-second-${i}`}
+                          className="flex-shrink-0 w-[20rem] sm:w-[28rem] lg:w-[36rem] mx-2 sm:mx-4"
+                        >
+                          <div className="bg-white p-0 rounded-2xl shadow-sm border border-gray-100 h-full flex items-center justify-center">
+                            <Image
+                              src={`/image/after${i + 1}.jpg`}
+                              alt={`After 사례 ${i + 1}`}
+                              width={900}
+                              height={1200}
+                              className="rounded-xl object-contain max-h-full w-full h-auto"
+                              sizes="(max-width: 640px) 20rem, (max-width: 1024px) 28rem, 36rem"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="space-y-2 text-left">
                     <div className="flex items-start">
